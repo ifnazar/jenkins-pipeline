@@ -7,18 +7,14 @@ for (int i = 0; i < clusters.size(); i++) {
     jobs["jobs-${cluster}"] = {
         node {
             stage("plan ${cluster}") {
-                      steps {
 			echo '${cluster} Testing..'
 			sleep 30
 			echo '${cluster} Testing..'
-        		    }
             }
             stage("apply ${cluster}") {
-                      steps {
 			echo '${cluster} Testing..'
 			sleep 60
 			echo '${cluster} Testing..'
-        		    }
             }            
             
         }
