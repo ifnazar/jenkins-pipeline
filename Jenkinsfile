@@ -6,11 +6,21 @@ for (int i = 0; i < clusters.size(); i++) {
     def cluster = clusters[i]
     jobs["jobs-${cluster}"] = {
         node {
-            stage("Build ${cluster}") {
+            stage("plan ${cluster}") {
+                      steps {
+			echo '${cluster} Testing..'
+			sleep 30
+			echo '${cluster} Testing..'
+        		    }
+            }
+            stage("apply ${cluster}") {
+                      steps {
 			echo '${cluster} Testing..'
 			sleep 60
 			echo '${cluster} Testing..'
-            }
+        		    }
+            }            
+            
         }
     }
 }
