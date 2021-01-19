@@ -8,6 +8,8 @@ for (int i = 0; i < clusters.size(); i++) {
         node {
             stage("Build ${cluster}") {
 			echo '${cluster} Testing..'
+			sleep 1m
+			echo '${cluster} Testing..'
             }
         }
     }
