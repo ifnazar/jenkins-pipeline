@@ -8,7 +8,7 @@ for (int i = 0; i < clusters.size(); i++) {
         node {
             stage("Build ${cluster}") {
 			echo '${cluster} Testing..'
-			sleep 1m
+			sleep 60
 			echo '${cluster} Testing..'
             }
         }
