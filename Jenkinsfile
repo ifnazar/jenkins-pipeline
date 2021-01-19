@@ -7,9 +7,7 @@ for (int i = 0; i < clusters.size(); i++) {
     jobs["jobs-${cluster}"] = {
         node {
             stage("Build ${cluster}") {
-                build job: 'Application-Builder', parameters: [
-                    string(name: 'Cluster', value: cluster),
-                ]
+			echo '${cluster} Testing..'
             }
         }
     }
