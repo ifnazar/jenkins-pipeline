@@ -1,51 +1,59 @@
-def clusters = ["clusterA", "clusterB", "clusterC"]
-def jobs     = [:]
+def clusters = ["clusterA", "clusterB", "clusterC", "clusterD", "clusterE", "clusterF", "clusterG", "clusterH", "clusterI", "clusterJ", "clusterL", "clusterM", "clusterN", "clusterO", "clusterP", "clusterQ", "clusterR", "clusterS", "clusterT"]
+def jobsA     = [:]
+def jobsB     = [:]
+
 
 
 for (int i = 0; i < clusters.size(); i++) {
     def cluster = clusters[i]
-    jobs["jobs-${cluster}"] = {
+    jobsA["jobs-${cluster}"] = {
         node {
-            stage("plan ${cluster}") {
+            stage("init ${cluster}") {
 			echo '${cluster} Testing..'
-			sleep 30
+			sleep 10
 			echo '${cluster} Testing..'
             }
-            stage("apply ${cluster}") {
-			echo '${cluster} Testing..'
-			sleep 60
-			echo '${cluster} Testing..'
-            }            
-            
         }
     }
 }
+
+for (int i = 0; i < clusters.size(); i++) {
+    def cluster = clusters[i]
+    jobsB["jobs-${cluster}"] = {
+        node {
+            stage("plan ${cluster}") {
+			echo '${cluster} Testing..'
+			sleep 20
+			echo '${cluster} Testing..'
+            }
+        }
+    }
+}
+
+
 
 pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build/Test Manager') {
             steps {
                 echo 'Building..'
             }
         }
-	 stage('XXXXXXXXXXX') {
+	 stage('INIT') {
             steps {
                 script {
-                    parallel jobs
+                    parallel jobsA
+                }
+            }
+        }
+	 stage('PLAN') {
+            steps {
+                script {
+                    parallel jobsA
                 }
             }
         }        
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
     }
 }
