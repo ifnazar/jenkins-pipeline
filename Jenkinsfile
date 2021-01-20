@@ -34,6 +34,9 @@ for (int i = 0; i < clusters.size(); i++) {
 
 pipeline {
     agent any
+    options {
+       buildDiscarder(logRotator(numToKeepStr: '1', artifactNumToKeepStr: '1'))
+    }    
 
     stages {
         stage('Build/Test Manager') {
